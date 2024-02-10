@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ScholarshipHub"
 include(":app")
+include(":admin")
