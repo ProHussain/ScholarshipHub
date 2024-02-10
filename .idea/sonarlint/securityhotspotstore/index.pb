@@ -38,3 +38,11 @@ w
 G.idea/sonarlint/issuestore/0/1/019b7dc35f299db2fac76229c53bde63b6678488,b\f\bfdbf40ab7291e935d2fb1840aaecfb559a20c98
 Å
 Q.idea/sonarlint/securityhotspotstore/0/1/019b7dc35f299db2fac76229c53bde63b6678488,4\b\4be1cd941913ab5edce2212206516bb17a7f0e70
+q
+Aapp/src/main/java/com/hashmac/scholarshiphub/VIewAllActivity.java,8\f\8f1b4129b9c61a4b750498e9e066ed4e8bc78f17
+|
+Lapp/src/main/java/com/hashmac/scholarshiphub/ScholarshipDetailsActivity.java,b\6\b6227afb6ce450d6b3fbd08170d496c49605ae31
+z
+Japp/src/main/java/com/hashmac/scholarshiphub/ScholarshipsListActivity.java,b\f\bfcaac21f4b01bbb1e07d781935cce716d051aa9
+q
+Aapp/src/main/java/com/hashmac/scholarshiphub/ViewAllActivity.java,6\6\66f1af1c7c6ccda95e6d787c0d648a2a76bd8283

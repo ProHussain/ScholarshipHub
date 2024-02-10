@@ -14,11 +14,11 @@
         android:layout_marginBottom="8dp"
         tools:ignore="UseCompoundDrawables">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivItem"
             android:layout_width="172dp"
             android:layout_height="96dp"
-            android:src="@drawable/iv_pakistan"
+            android:src="@drawable/temp"
             tools:ignore="ContentDescription" />
 
         <TextView
