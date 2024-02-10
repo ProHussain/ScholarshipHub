@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ScholarshipHub</string>
+    <string name="awarding_countries">Awarding Countries</string>
+    <string name="view_all">View All</string>
+    <string name="your_nationality">Your Nationality</string>
+    <string name="subjects">Subjects</string>
+    <string name="universities">Universities</string>
+    <string name="degree_level">Degree Level</string>
+</resources>
