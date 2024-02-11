@@ -30,7 +30,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvNationalities"
+        android:id="@+id/rvDegreeLevel"
         android:layout_width="0dp"
         tools:listitem="@layout/item_main_common"
         android:layout_height="wrap_content"

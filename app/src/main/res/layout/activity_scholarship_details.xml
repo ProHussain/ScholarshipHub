@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".ScholarshipDetailsActivity">
+    tools:context=".ui.ScholarshipDetailsActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -34,6 +34,7 @@
             android:orientation="vertical">
 
             <include
+                android:id="@+id/layoutScholarship"
                 layout="@layout/item_scholarship"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

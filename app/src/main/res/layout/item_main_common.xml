@@ -19,12 +19,13 @@
             android:id="@+id/ivItem"
             android:layout_width="72dp"
             android:layout_height="72dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/iv_pakistan"
             tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
