@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "41174737659",
+    "project_id": "scholarshiphub-b78eb",
+    "storage_bucket": "scholarshiphub-b78eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41174737659:android:ea00d30f125bd4e8b6465e",
+        "android_client_info": {
+          "package_name": "com.hashmac.scholarshiphub.admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOU0nezmho4gkOOZrWOby8ReDw6sBmxkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
