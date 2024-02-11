@@ -14,4 +14,9 @@
     <string name="open">Open</string>
     <string name="scholarship_description">Scholarship Description</string>
     <string name="simple_description">A scholarship is an award of financial aid for a student to further their education. Scholarships are awarded based upon various criteria, which usually reflect the values and purposes of the donor or founder of the award. Scholarship money is not required to be repaid.\n\nScholarships are awarded through a variety of sources, such as schools, community organizations, and private donors. The most common scholarships may be classified as:\n\nMerit-based: These awards are based on a student\'s academic, artistic, athletic, or other abilities, and often factor in an applicant\'s extracurricular activities and community service record. The most common merit-based scholarships, awarded by either private organizations or directly by a student\'s intended college, recognize academic achievement or high scores on standardized tests. Most such merit-based scholarships are paid directly by the institution the student attends.\n\nNeed-based: In the United States, these awards are based on the student and family\'s financial record and require applicants to fill out a Free Application for Federal Student Aid (FAFSA) to qualify if the scholarship is a federal award. Private need-based scholarships are typically awarded by the school\'s financial aid office and require applicants to fill out the institution\'s own financial aid forms. Scholarships may have a financial need component but rely on other criteria as well.\n\nStudent-specific: These are scholarships for which applicants must initially</string>
+    <string name="action_add">Add</string>
+    <string name="country">Country</string>
+    <string name="university">University</string>
+    <string name="submit">Submit</string>
+    <string name="delete">Delete</string>
 </resources>

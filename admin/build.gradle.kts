@@ -1,13 +1,14 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.hashmac.scholarshiphb.admin"
+    namespace = "com.hashmac.scholarshiphub.admin"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.hashmac.scholarshiphb.admin"
+        applicationId = "com.hashmac.scholarshiphub.admin"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -29,6 +30,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -37,6 +42,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.timber)
+    implementation(libs.glide)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

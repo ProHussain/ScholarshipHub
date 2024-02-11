@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="subjects">
+        <item>Accounting</item>
+        <item>Agriculture</item>
+        <item>Architecture</item>
+        <item>Business</item>
+        <item>Chemistry</item>
+        <item>Computer Science</item>
+        <item>Criminal Justice</item>
+        <item>Dentistry</item>
+        <item>Engineering</item>
+        <item>Environmental Science</item>
+        <item>International Relations</item>
+    </string-array>
+
+    <string-array name="countries">
+        <item>Pakistan</item>
+        <item>USA</item>
+        <item>UK</item>
+        <item>Canada</item>
+        <item>Germany</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Spain</item>
+        <item>China</item>
+        <item>Japan</item>
+        <item>India</item>
+    </string-array>
+
+    <string-array name="continents">
+        <item>Asia</item>
+        <item>Africa</item>
+        <item>Europe</item>
+        <item>North America</item>
+        <item>South America</item>
+        <item>Australia</item>
+    </string-array>
+
+    <string-array name="degree_levels">
+        <item>Undergraduate</item>
+        <item>Postgraduate</item>
+        <item>PhD</item>
+    </string-array>
+
+    <string-array name="funds_status">
+        <item>Fully Funded</item>
+        <item>Partially Funded</item>
+        <item>Not Funded</item>
+    </string-array>
+
+    <string-array name="student_types">
+        <item>International</item>
+        <item>Domestic</item>
+    </string-array>
+</resources>

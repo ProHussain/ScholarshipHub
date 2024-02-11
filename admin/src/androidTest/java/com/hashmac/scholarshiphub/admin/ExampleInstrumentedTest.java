@@ -1,4 +1,4 @@
-package com.hashmac.scholarshiphb.admin;
+package com.hashmac.scholarshiphub.admin;
 
 import android.content.Context;
 
