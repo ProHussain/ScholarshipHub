@@ -62,6 +62,14 @@ public class ScholarshipsAdapter extends RecyclerView.Adapter<ScholarshipsAdapte
                 intent.putExtra("scholarship", scholarship);
                 binding.getRoot().getContext().startActivity(intent);
             });
+
+            binding.btnViewDetails.setOnClickListener(view -> {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(android.net.Uri.parse(scholarship.getScholarshipUrl()));
+                binding.getRoot().getContext().startActivity(intent);
+            });
         }
     }
 }

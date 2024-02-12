@@ -1,5 +1,7 @@
 package com.hashmac.scholarshiphub.dto;
 
+import androidx.annotation.Keep;
+
 import java.io.Serializable;
 
 public class Scholarship implements Serializable {
@@ -14,13 +16,15 @@ public class Scholarship implements Serializable {
     private String students;
     private String description;
     private String imageUrl;
+    private String scholarshipUrl;
     private String createdAt;
     private String updatedAt;
 
+    @Keep
     public Scholarship() {
     }
 
-    public Scholarship(String id, String name, String country, String continent, String university, String subjects, String degreeLevel, String funds, String students, String description, String imageUrl, String createdAt, String updatedAt) {
+    public Scholarship(String id, String name, String country, String continent, String university, String subjects, String degreeLevel, String funds, String students, String description, String imageUrl, String scholarshipUrl, String createdAt, String updatedAt) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -32,6 +36,7 @@ public class Scholarship implements Serializable {
         this.students = students;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.scholarshipUrl = scholarshipUrl;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -122,6 +127,10 @@ public class Scholarship implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getScholarshipUrl() {
+        return scholarshipUrl;
     }
 
     public String getCreatedAt() {

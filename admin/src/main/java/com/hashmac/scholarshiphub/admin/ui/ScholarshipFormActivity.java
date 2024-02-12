@@ -75,6 +75,7 @@ public class ScholarshipFormActivity extends AppCompatActivity implements RepoLi
             binding.etDegreeLevel.setText(scholarship.getDegreeLevel());
             binding.actvStatus.setText(scholarship.getFunds());
             binding.actvStudents.setText(scholarship.getStudents());
+            binding.etURL.setText(scholarship.getScholarshipUrl());
             binding.etDescription.setText(scholarship.getDescription());
         }
         binding.btnSubmit.setText(scholarship == null ? "Add" : "Update");
@@ -199,12 +200,13 @@ public class ScholarshipFormActivity extends AppCompatActivity implements RepoLi
         String funds = binding.actvStatus.getText().toString();
         String students = binding.actvStudents.getText().toString();
         String description = binding.etDescription.getText().toString().trim();
-        if (name.isEmpty() || country.isEmpty() || continent.isEmpty() || university.isEmpty() || subjects.isEmpty() || degreeLevel.isEmpty() || funds.isEmpty() || students.isEmpty() || description.isEmpty()) {
+        String link = binding.etURL.getText().toString().trim();
+        if (name.isEmpty() || country.isEmpty() || continent.isEmpty() || university.isEmpty() || subjects.isEmpty() || degreeLevel.isEmpty() || funds.isEmpty() || students.isEmpty() || description.isEmpty() || link.isEmpty()) {
             return;
         }
         progressDialog.setMessage("Updating scholarship...");
         progressDialog.show();
-        Scholarship temp = new Scholarship(this.scholarship.getId(), name, country, continent, university, subjects, degreeLevel, funds, students, description, this.scholarship.getImageUrl(), this.scholarship.getCreatedAt(), null);
+        Scholarship temp = new Scholarship(this.scholarship.getId(), name, country, continent, university, subjects, degreeLevel, funds, students, description, this.scholarship.getImageUrl(), link, this.scholarship.getCreatedAt(), null);
         repository.updateScholarship(temp, imageUri);
     }
 
@@ -225,7 +227,8 @@ public class ScholarshipFormActivity extends AppCompatActivity implements RepoLi
         String funds = binding.actvStatus.getText().toString();
         String students = binding.actvStudents.getText().toString();
         String description = binding.etDescription.getText().toString().trim();
-        if (name.isEmpty() || country.isEmpty() || continent.isEmpty() || university.isEmpty() || subjects.isEmpty() || degreeLevel.isEmpty() || funds.isEmpty() || students.isEmpty() || description.isEmpty()) {
+        String link = binding.etURL.getText().toString().trim();
+        if (name.isEmpty() || country.isEmpty() || continent.isEmpty() || university.isEmpty() || subjects.isEmpty() || degreeLevel.isEmpty() || funds.isEmpty() || students.isEmpty() || description.isEmpty() || link.isEmpty()) {
             return;
         }
         if (imageUri == null) {
@@ -234,7 +237,7 @@ public class ScholarshipFormActivity extends AppCompatActivity implements RepoLi
         }
         progressDialog.setMessage("Adding scholarship...");
         progressDialog.show();
-        Scholarship scholarship = new Scholarship(null, name, country, continent, university, subjects, degreeLevel, funds, students, description, null, null, null);
+        Scholarship scholarship = new Scholarship(null, name, country, continent, university, subjects, degreeLevel, funds, students, description, link, null, null, null);
         repository.addScholarship(scholarship, imageUri);
     }
 
