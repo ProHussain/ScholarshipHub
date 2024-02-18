@@ -1,6 +1,8 @@
 package com.hashmac.scholarshiphub.admin.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +16,14 @@ import com.hashmac.scholarshiphub.admin.databinding.ItemScholarshipBinding;
 import com.hashmac.scholarshiphub.admin.dto.Scholarship;
 import com.hashmac.scholarshiphub.admin.ui.ScholarshipFormActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.microedition.khronos.opengles.GL;
+
+import timber.log.Timber;
 
 public class ScholarshipsAdapter extends RecyclerView.Adapter<ScholarshipsAdapter.ScholarshipViewHolder>{
     private List<Scholarship> scholarships = new ArrayList<>();
@@ -59,12 +65,31 @@ public class ScholarshipsAdapter extends RecyclerView.Adapter<ScholarshipsAdapte
             binding.tvSubjects.setText(scholarship.getSubjects());
             binding.tvNationality.setText(scholarship.getStudents());
             binding.tvCountry.setText(scholarship.getCountry());
+            binding.tvExpiryDate.setText(scholarship.getExpiryDate());
+
+            if (isDateExpired(scholarship.getExpiryDate())) {
+                binding.btnViewDetails.setBackgroundColor(binding.getRoot().getContext().getResources().getColor(R.color.colorAccent));
+                binding.btnViewDetails.setText(R.string.expired);
+                binding.btnViewDetails.setEnabled(false);
+                binding.btnViewDetails.setTextColor(binding.getRoot().getContext().getResources().getColor(R.color.white));
+            }
 
             binding.getRoot().setOnClickListener(view -> {
                 Intent intent = new Intent(binding.getRoot().getContext(), ScholarshipFormActivity.class);
                 intent.putExtra("scholarship", scholarship);
                 binding.getRoot().getContext().startActivity(intent);
             });
+        }
+
+        private boolean isDateExpired(String expiryDate) {
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                return Objects.requireNonNull(sdf.parse(expiryDate)).before(sdf.parse(sdf.format(System.currentTimeMillis())));
+            } catch (Exception e) {
+                Timber.e(e);
+                return false;
+            }
         }
     }
 }

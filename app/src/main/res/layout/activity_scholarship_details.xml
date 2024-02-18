@@ -116,6 +116,15 @@
                         android:text="@string/california"
                         android:textSize="14sp" />
 
+                    <TextView
+                        android:id="@+id/tvExpiryDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/_18_02_2024"
+                        android:textSize="14sp" />
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnViewDetails"
                         android:layout_width="match_parent"
@@ -134,6 +143,7 @@
 
             <androidx.cardview.widget.CardView
                 app:cardCornerRadius="16dp"
+                android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -163,6 +173,15 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChatWithAdmin"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="16dp"
+                android:layout_width="match_parent"
+                app:cornerRadius="8dp"
+                android:text="@string/chat_with_admin"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

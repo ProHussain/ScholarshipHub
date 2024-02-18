@@ -17,6 +17,8 @@ public class Scholarship implements Serializable {
     private String description;
     private String imageUrl;
     private String scholarshipUrl;
+
+    private String expiryDate;
     private String createdAt;
     private String updatedAt;
 
@@ -24,7 +26,7 @@ public class Scholarship implements Serializable {
     public Scholarship() {
     }
 
-    public Scholarship(String id, String name, String country, String continent, String university, String subjects, String degreeLevel, String funds, String students, String description, String imageUrl, String scholarshipUrl, String createdAt, String updatedAt) {
+    public Scholarship(String id, String name, String country, String continent, String university, String subjects, String degreeLevel, String funds, String students, String description, String imageUrl, String scholarshipUrl, String expiryDate, String createdAt, String updatedAt) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -37,6 +39,7 @@ public class Scholarship implements Serializable {
         this.description = description;
         this.imageUrl = imageUrl;
         this.scholarshipUrl = scholarshipUrl;
+        this.expiryDate = expiryDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -135,6 +138,14 @@ public class Scholarship implements Serializable {
 
     public void setScholarshipUrl(String scholarshipUrl) {
         this.scholarshipUrl = scholarshipUrl;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
     public String getCreatedAt() {

@@ -84,6 +84,15 @@
             android:text="@string/california"
             android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/tvExpiryDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/_18_02_2024"
+            android:textSize="14sp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnViewDetails"
             android:layout_width="match_parent"

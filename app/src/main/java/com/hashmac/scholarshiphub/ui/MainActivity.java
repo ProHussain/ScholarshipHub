@@ -2,6 +2,9 @@ package com.hashmac.scholarshiphub.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +18,7 @@ import com.hashmac.scholarshiphub.utils.DataSource;
 import com.hashmac.scholarshiphub.utils.ViewAll;
 
 import java.util.List;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -27,11 +31,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        initSearch();
         initAwardingCountries();
         initNationality();
         initSubjects();
         initUniversities();
         initDegreeLevel();
+    }
+
+    private void initSearch() {
+        binding.etSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                String query = Objects.requireNonNull(binding.etSearch.getText()).toString().trim();
+                if (!query.isEmpty()) {
+                    Intent intent = new Intent(this, ScholarshipsListActivity.class);
+                    intent.putExtra("Action", "Search");
+                    intent.putExtra("Query", query);
+                    startActivity(intent);
+                }
+                return true;
+            }
+            return false;
+        });
     }
 
     private void initUniversities() {

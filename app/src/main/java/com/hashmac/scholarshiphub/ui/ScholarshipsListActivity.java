@@ -4,15 +4,10 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.hashmac.scholarshiphub.R;
 import com.hashmac.scholarshiphub.adapter.ScholarshipsAdapter;
 import com.hashmac.scholarshiphub.databinding.ActivityScholarshipsListBinding;
 import com.hashmac.scholarshiphub.dto.Scholarship;
@@ -39,23 +34,50 @@ public class ScholarshipsListActivity extends AppCompatActivity {
 
     private void initArgs() {
         String query = getIntent().getStringExtra("Query");
+        String action = getIntent().getStringExtra("Action");
+        if (action == null) {
+            action = "Filter";
+        }
         Objects.requireNonNull(getSupportActionBar()).setTitle(query);
-        fetchScholarships(query);
+        fetchScholarships(query, action);
     }
 
-    private void fetchScholarships(String query) {
+    private void fetchScholarships(String query, String action) {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
         fireStore.collection("scholarships").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Scholarship> scholarships = task.getResult().toObjects(Scholarship.class);
-                filterScholarships(scholarships, query);
+                if (action.equals("Search"))
+                    searchScholarships(scholarships, query);
+                else
+                    filterScholarships(scholarships, query);
             } else {
                 progressDialog.dismiss();
                 Timber.e("Error fetching scholarships");
             }
         });
+    }
+
+    private void searchScholarships(List<Scholarship> scholarships, String query) {
+        Timber.d("Searching Scholarships");
+        Timber.d("Query: %s", query);
+        Timber.d("Scholarships: %s", scholarships);
+        List<Scholarship> searchedScholarships = new ArrayList<>();
+        for (Scholarship scholarship : scholarships) {
+            if (scholarship.getName().toLowerCase().contains(query.toLowerCase())
+                    || scholarship.getCountry().toLowerCase().contains(query.toLowerCase())
+                    || scholarship.getDegreeLevel().toLowerCase().contains(query.toLowerCase())
+                    || scholarship.getUniversity().toLowerCase().contains(query.toLowerCase())
+                    || scholarship.getSubjects().toLowerCase().contains(query.toLowerCase())) {
+                searchedScholarships.add(scholarship);
+            }
+        }
+        progressDialog.dismiss();
+        ScholarshipsAdapter adapter = new ScholarshipsAdapter();
+        adapter.setScholarships(searchedScholarships);
+        binding.recyclerView.setAdapter(adapter);
     }
 
     private void filterScholarships(List<Scholarship> scholarships, String query) {

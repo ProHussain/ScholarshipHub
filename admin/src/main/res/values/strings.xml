@@ -20,4 +20,7 @@
     <string name="submit">Submit</string>
     <string name="delete">Delete</string>
     <string name="scholarship_link">Link</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="_18_02_2024">18-02-2024</string>
+    <string name="expired">Expired</string>
 </resources>

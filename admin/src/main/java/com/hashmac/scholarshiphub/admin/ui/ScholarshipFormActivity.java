@@ -1,6 +1,7 @@
 package com.hashmac.scholarshiphub.admin.ui;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.hashmac.scholarshiphub.admin.R;
 import com.hashmac.scholarshiphub.admin.databinding.ActivityScholarshipFormBinding;
 import com.hashmac.scholarshiphub.admin.dto.Scholarship;
@@ -76,6 +78,7 @@ public class ScholarshipFormActivity extends AppCompatActivity implements RepoLi
             binding.actvStatus.setText(scholarship.getFunds());
             binding.actvStudents.setText(scholarship.getStudents());
             binding.etURL.setText(scholarship.getScholarshipUrl());
+            binding.etDate.setText(scholarship.getExpiryDate());
             binding.etDescription.setText(scholarship.getDescription());
         }
         binding.btnSubmit.setText(scholarship == null ? "Add" : "Update");
@@ -180,6 +183,16 @@ public class ScholarshipFormActivity extends AppCompatActivity implements RepoLi
         });
         binding.ivPickImage.setOnClickListener(v -> pickImage());
         binding.btnDelete.setOnClickListener(v -> deleteScholarship());
+        binding.etDate.setOnClickListener(v -> showDatePicker());
+    }
+
+    private void showDatePicker() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this);
+        datePickerDialog.setOnDateSetListener((view, year, month, dayOfMonth) -> {
+            String date = dayOfMonth + "-" + (month + 1) + "-" + year;
+            binding.etDate.setText(date);
+        });
+        datePickerDialog.show();
     }
 
     private void deleteScholarship() {
@@ -201,12 +214,13 @@ public class ScholarshipFormActivity extends AppCompatActivity implements RepoLi
         String students = binding.actvStudents.getText().toString();
         String description = binding.etDescription.getText().toString().trim();
         String link = binding.etURL.getText().toString().trim();
-        if (name.isEmpty() || country.isEmpty() || continent.isEmpty() || university.isEmpty() || subjects.isEmpty() || degreeLevel.isEmpty() || funds.isEmpty() || students.isEmpty() || description.isEmpty() || link.isEmpty()) {
+        String expiryDate = binding.etDate.getText().toString().trim();
+        if (name.isEmpty() || country.isEmpty() || continent.isEmpty() || university.isEmpty() || subjects.isEmpty() || degreeLevel.isEmpty() || funds.isEmpty() || students.isEmpty() || description.isEmpty() || link.isEmpty() || expiryDate.isEmpty()) {
             return;
         }
         progressDialog.setMessage("Updating scholarship...");
         progressDialog.show();
-        Scholarship temp = new Scholarship(this.scholarship.getId(), name, country, continent, university, subjects, degreeLevel, funds, students, description, this.scholarship.getImageUrl(), link, this.scholarship.getCreatedAt(), null);
+        Scholarship temp = new Scholarship(this.scholarship.getId(), name, country, continent, university, subjects, degreeLevel, funds, students, description, this.scholarship.getImageUrl(), link, expiryDate, this.scholarship.getCreatedAt(), null);
         repository.updateScholarship(temp, imageUri);
     }
 
@@ -228,7 +242,8 @@ public class ScholarshipFormActivity extends AppCompatActivity implements RepoLi
         String students = binding.actvStudents.getText().toString();
         String description = binding.etDescription.getText().toString().trim();
         String link = binding.etURL.getText().toString().trim();
-        if (name.isEmpty() || country.isEmpty() || continent.isEmpty() || university.isEmpty() || subjects.isEmpty() || degreeLevel.isEmpty() || funds.isEmpty() || students.isEmpty() || description.isEmpty() || link.isEmpty()) {
+        String expiryDate = binding.etDate.getText().toString().trim();
+        if (name.isEmpty() || country.isEmpty() || continent.isEmpty() || university.isEmpty() || subjects.isEmpty() || degreeLevel.isEmpty() || funds.isEmpty() || students.isEmpty() || description.isEmpty() || link.isEmpty() || expiryDate.isEmpty()) {
             return;
         }
         if (imageUri == null) {
@@ -237,7 +252,7 @@ public class ScholarshipFormActivity extends AppCompatActivity implements RepoLi
         }
         progressDialog.setMessage("Adding scholarship...");
         progressDialog.show();
-        Scholarship scholarship = new Scholarship(null, name, country, continent, university, subjects, degreeLevel, funds, students, description, link, null, null, null);
+        Scholarship scholarship = new Scholarship(null, name, country, continent, university, subjects, degreeLevel, funds, students, description, link, expiryDate, null, null, null);
         repository.addScholarship(scholarship, imageUri);
     }
 
