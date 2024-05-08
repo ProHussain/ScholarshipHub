@@ -90,3 +90,7 @@ Mapp/src/main/java/com/hashmac/scholarshiphub/adapter/ScholarshipsAdapter.java,
 Oapp/src/main/java/com/hashmac/scholarshiphub/ui/ScholarshipDetailsActivity.java,b\d\bd835fb18ed625bd1f24caba0cecc830caf27591
 q
 Aapp/src/main/java/com/hashmac/scholarshiphub/dto/Scholarship.java,f\2\f28cf7ee04244b0c7c64ffec7a73d30153eaf683
+‚
+Rapp/src/main/java/com/hashmac/scholarshiphub/utils/MyFirebaseMessagingService.java,2\5\25e8e0b19facb9c52e9eae38758e420b2a8e7fee
+H
+app/google-services.json,f\d\fd8d34b142d02ec743a8efefefd2c097961666e9

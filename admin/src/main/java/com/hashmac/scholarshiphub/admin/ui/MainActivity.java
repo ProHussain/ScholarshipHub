@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements RepoListener {
     }
 
     private void initAdapter() {
-        adapter = new ScholarshipsAdapter();
+        adapter = new ScholarshipsAdapter(scholarship -> repository.sendNotification(scholarship,"Scholarship date is expired"));
         binding.recyclerView.setAdapter(adapter);
     }
 

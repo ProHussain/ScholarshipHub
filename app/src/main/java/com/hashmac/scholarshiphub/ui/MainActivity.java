@@ -1,14 +1,18 @@
 package com.hashmac.scholarshiphub.ui;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.hashmac.scholarshiphub.adapter.CommonAdapter;
 import com.hashmac.scholarshiphub.adapter.UniversityAdapter;
 import com.hashmac.scholarshiphub.databinding.ActivityMainBinding;
@@ -20,23 +24,43 @@ import com.hashmac.scholarshiphub.utils.ViewAll;
 import java.util.List;
 import java.util.Objects;
 
-import timber.log.Timber;
-
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private CommonAdapter awardingCountryAdapter;
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // FCM SDK (and your app) can post notifications.
+                } else {
+                    Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show();
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        initNotificationPermission();
         initSearch();
         initAwardingCountries();
         initNationality();
         initSubjects();
         initUniversities();
         initDegreeLevel();
+    }
+
+    private void initNotificationPermission() {
+        // Check notification permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                // FCM SDK (and your app) can post notifications.
+            } else {
+                requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 
     private void initSearch() {

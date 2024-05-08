@@ -1,8 +1,8 @@
 package com.hashmac.scholarshiphub.admin.repo;
 
-import android.app.ProgressDialog;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.os.AsyncTask;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -10,11 +10,19 @@ import com.google.firebase.storage.StorageReference;
 import com.hashmac.scholarshiphub.admin.dto.Scholarship;
 import com.hashmac.scholarshiphub.admin.utils.RepoListener;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import timber.log.Timber;
 
 public class ScholarshipRepository {
+    private static final String YOUR_SERVER_KEY = "AAAACZY0ovs:APA91bG7LEXNtFsjQr4IYW3muLw32oRee8txPLEQz8F8ITcIPWNaS-XcOss2NWJpMog_6XGUGOIM2xWnu_8PppnrBs0lNZXsKNWC55TbZNOiu-2eYmj-h4kSaTuB_6C0aikk_K8GL8YM";
     private final StorageReference storageReference;
     private final FirebaseFirestore firestore;
     private static ScholarshipRepository instance;
@@ -62,12 +70,46 @@ public class ScholarshipRepository {
         firestore.collection(scholarshipCollection).document(id).set(scholarship).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Timber.d("Scholarship added successfully");
+                sendNotification(scholarship.getName(), "New scholarship available");
                 listener.onRepoSuccess();
             } else {
                 listener.onRepoFailure("Error uploading scholarship by "+task.getException().getMessage());
                 Timber.e("Error uploading scholarship by "+task.getException().getMessage());
             }
         });
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    public void sendNotification(String title, String message) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    JSONObject json = new JSONObject();
+                    JSONObject notificationJson = new JSONObject();
+                    notificationJson.put("title", title);
+                    notificationJson.put("body", message);
+                    JSONObject message = new JSONObject();
+                    message.put("notification", notificationJson);
+                    message.put("to", "/topics/scholarship");
+                    json.put("message", message);
+                    RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), message.toString());
+                    Request request = new Request.Builder()
+                            .header("Authorization", "key="+YOUR_SERVER_KEY)
+                            .url("https://fcm.googleapis.com/fcm/send")
+                            .post(body)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String finalResponse = response.body().string();
+                    Timber.d("Notification sent successfully");
+                    Timber.d(finalResponse);
+                } catch (Exception e) {
+                    Timber.e("Error sending notification");
+                }
+                return null;
+            }
+        }.execute();
     }
 
     public void deleteScholarship(Scholarship scholarship) {

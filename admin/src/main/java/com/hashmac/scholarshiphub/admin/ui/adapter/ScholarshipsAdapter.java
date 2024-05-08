@@ -27,6 +27,12 @@ import timber.log.Timber;
 
 public class ScholarshipsAdapter extends RecyclerView.Adapter<ScholarshipsAdapter.ScholarshipViewHolder>{
     private List<Scholarship> scholarships = new ArrayList<>();
+    private OnScholarshipClickListener listener;
+
+    public ScholarshipsAdapter(OnScholarshipClickListener listener) {
+        this.listener = listener;
+    }
+
     public void setScholarships(List<Scholarship> scholarships) {
         this.scholarships.clear();
         this.scholarships = scholarships;
@@ -49,7 +55,7 @@ public class ScholarshipsAdapter extends RecyclerView.Adapter<ScholarshipsAdapte
         return scholarships.size();
     }
 
-    public static class ScholarshipViewHolder extends RecyclerView.ViewHolder{
+    public class ScholarshipViewHolder extends RecyclerView.ViewHolder{
         private final ItemScholarshipBinding binding;
         public ScholarshipViewHolder(@NonNull ItemScholarshipBinding itemView) {
             super(itemView.getRoot());
@@ -70,11 +76,20 @@ public class ScholarshipsAdapter extends RecyclerView.Adapter<ScholarshipsAdapte
             if (isDateExpired(scholarship.getExpiryDate())) {
                 binding.btnViewDetails.setBackgroundColor(binding.getRoot().getContext().getResources().getColor(R.color.colorAccent));
                 binding.btnViewDetails.setText(R.string.expired);
-                binding.btnViewDetails.setEnabled(false);
                 binding.btnViewDetails.setTextColor(binding.getRoot().getContext().getResources().getColor(R.color.white));
             }
 
             binding.getRoot().setOnClickListener(view -> {
+                Intent intent = new Intent(binding.getRoot().getContext(), ScholarshipFormActivity.class);
+                intent.putExtra("scholarship", scholarship);
+                binding.getRoot().getContext().startActivity(intent);
+            });
+
+            binding.btnViewDetails.setOnClickListener(view -> {
+                if (isDateExpired(scholarship.getExpiryDate())) {
+                    listener.onScholarshipClick(scholarship.getName());
+                    return;
+                }
                 Intent intent = new Intent(binding.getRoot().getContext(), ScholarshipFormActivity.class);
                 intent.putExtra("scholarship", scholarship);
                 binding.getRoot().getContext().startActivity(intent);
@@ -91,5 +106,9 @@ public class ScholarshipsAdapter extends RecyclerView.Adapter<ScholarshipsAdapte
                 return false;
             }
         }
+    }
+
+    public interface OnScholarshipClickListener {
+        void onScholarshipClick(String scholarship);
     }
 }
